@@ -1,4 +1,14 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <?php
 session_start();
 
 $servername = 'localhost'; // Свързване с базата данни на XAMPP
@@ -11,12 +21,12 @@ $mysqli = new mysqli($servername, $username, $password, $dbname);
 
 // Проверка на връзката с DB
 if ($mysqli->connect_error) {
-    die("Неуспешно свързване: " . $mysqli->connect_error);
+    die("Connection error: " . $mysqli->connect_error);
 }
 
 // Проверка, дали потребителят е логнат
 if (!isset($_SESSION['user_id'])) {
-    echo "<a href='login.php'>Вход</a> | <a href='register.php'>Регистрация</a>";
+    echo "<a href='login.php'>Log in</a> | <a href='register.php'>Sign up</a>";
     exit;
 }
 
@@ -30,26 +40,26 @@ if (isset($_GET['url']) && $_GET['url'] != "") {
         $conn = new mysqli($servername, $username, $password, $dbname);
         
         if ($conn->connect_error) {
-            die("Неуспешно свързване: " . $conn->connect_error);
+            die("Connection error: " . $conn->connect_error);
         }
 
         $slug = GetShortUrl($url);
         $conn->close();
 
         // Визиализация на генерирания кратък URL и QR код
-        echo "Вашият кратък URL е: <br><a href='" . $base_url . $slug . "?redirect=" . $slug . "'>" . $base_url . $slug . "</a><br>";
+        echo "Your shortened URL е: <br><a href='" . $base_url . $slug . "?redirect=" . $slug . "'>" . $base_url . $slug . "</a><br>";
          // Генериране на QR код за краткия URL
          generateQRCode($base_url . $slug);
         
     } else {
-        die("$url - това не е валиден URL");
+        die("$url - invalid URL");
     }
 } else { ?>
     <center>
-    <h1>Въведете вашия URL тук</h1>
+    <h1>Enter URL</h1>
     <form method="get" action="">
-        <p><input style="width:500px" type="url" name="url" required /></p>
-        <p><input type="submit" value="Съкратете URL" /></p>
+    <input style="width:500px" type="url" name="url" required />
+    <input type="submit" value="Shrink URL" />
     </form>
     </center>
 <?php }
@@ -71,7 +81,7 @@ function GetShortUrl($url) {
         if ($conn->query($sql) === TRUE) {
             return $short_code;
         } else { 
-            die("Възникна грешка");
+            die("Error");
         }
     }
 }
@@ -99,7 +109,7 @@ function generateQRCode($url) {
     QRcode::png($url, $qrCodeFile, 'L', 4, 4); // 'L' - ниво на корекция на грешки, 4 - размер на QR кода
 
     // Визуализация на екрана
-    echo "Сканирайте QR кода за бърз достъп до URL:<br><img src='".$qrCodeFile."' alt='QR код' />";
+    echo "Scan QR code:<br><img src='".$qrCodeFile."' alt='QR code' />";
 }
 
 if (isset($_GET['redirect']) && $_GET['redirect'] != "") {
@@ -109,7 +119,7 @@ if (isset($_GET['redirect']) && $_GET['redirect'] != "") {
     $conn = new mysqli($servername, $username, $password, $dbname);
     
     if ($conn->connect_error) {
-        die("Неуспешно свързване: " . $conn->connect_error);
+        die("Connection error: " . $conn->connect_error);
     }
 
     $url = GetRedirectUrl($slug);
@@ -131,7 +141,10 @@ function GetRedirectUrl($slug) {
         $conn->query($sql);
         return $row['url']; // Връщаме оригиналния URL
     } else { 
-        die("Невалиден линк!");
+        die("Invalid link!");
     }
 }
 ?>
+    </div>
+</body>
+</html>

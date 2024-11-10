@@ -8,7 +8,7 @@ $dbname = 'urls';
 // Създаване на връзка с базата данни
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
-    die("Неуспешно свързване: " . $conn->connect_error);
+    die("Connection error: " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -27,17 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Потребител с това име вече съществува!";
+        echo "User with this name already exists!";
     } else {
         // Добавяне на нов потребител в базата данни
         $query = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('sss', $user, $hashed_password, $email);
         if ($stmt->execute()) {
-            echo "Регистрацията беше успешна!";
+            echo "Successfully signed up!";
             header('Location: login.php'); // Пренасочване към страницата за вход
         } else {
-            echo "Възникна грешка при регистрацията.";
+            echo "There is an error during signing up.";
         }
     }
 
@@ -47,19 +47,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+        <link rel="stylesheet" href="./styles.css" />
+    <title>Signing up</title>
 </head>
 <body>
-    <h2>Регистрация</h2>
-    <form method="POST">
-        <p>Потребителско име: <input type="text" name="username" required></p>
-        <p>Парола: <input type="password" name="password" required></p>
-        <p>Електронна поща: <input type="email" name="email"></p>
-        <p><input type="submit" value="Регистрация"></p>
-    </form>
+    <center>
+        <h2>Signing up</h2>
+        <form method="POST">
+            <p>Username: <input type="text" name="username" required></p>
+            <p>Password: <input type="password" name="password" required></p>
+            <p>Email: <input type="email" name="email"></p>
+            <p><input type="submit" value="Signing up"></p>
+        </form>
+    </center>
 </body>
 </html>

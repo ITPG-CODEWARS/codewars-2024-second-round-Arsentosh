@@ -6,7 +6,26 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-echo "Добре дошли, " . $_SESSION['username'];
+// echo "Welcome, " . $_SESSION['username'];
 ?>
-<a href="index.php">Влезте на сайта</a>
-<a href="logout.php">Изход</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <center>
+            <div class="welcome-message">
+                <?php echo "Welcome, " . htmlspecialchars($_SESSION['username']); ?>
+            </div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.php">Home</a><br>
+                <a class="nav-link" href="logout.php">Back</a>
+            </div>
+        </center>
+    </div>
+</body>
+</html>

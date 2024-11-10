@@ -1,0 +1,93 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(34, 123, 65);
+}
+
+a:hover {
+  color: rgb(22, 183, 167);
+  transition: 0.4s;
+}
+
+a:focus {
+  color: rgb(22, 183, 167);
+  transition: 0.4s;
+}
+
+input[type="submit"] {
+  background-image: linear-gradient(#42a1ec, #0070c9);
+  border: 1px solid #0077cc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  direction: ltr;
+  display: block;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  line-height: 1.47059;
+  min-width: 30px;
+  overflow: visible;
+  padding: 4px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+input[type="submit"]:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+input[type="submit"]:hover {
+  background-image: linear-gradient(#51a9ee, #147bcd);
+  border-color: #1482d0;
+  text-decoration: none;
+}
+
+input[type="submit"]:active {
+  background-image: linear-gradient(#3d94d9, #0067b9);
+  border-color: #006dbc;
+  outline: none;
+}
+
+input[type="submit"]:focus {
+  box-shadow: rgba(131, 192, 253, 0.5) 0 0 0 3px;
+  outline: none;
+}
+
+input {
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 4px 0;
+}
+
+input:focus {
+  background-color: lightblue;
+  border-radius: 4px;
+  border: 3px solid #555;
+  transition: 0.4s;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-link {
+  gap: 8px;
+}

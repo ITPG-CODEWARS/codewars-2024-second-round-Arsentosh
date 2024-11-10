@@ -7,7 +7,7 @@ $dbname = 'urls';
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
-    die("Неуспешно свързване: " . $conn->connect_error);
+    die("Connection error: " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -27,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($pass, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
-            echo "Добре дошли, " . $_SESSION['username'];
+            echo "Welcome, " . $_SESSION['username'];
             header('Location: dashboard.php'); // Пренасочване към контролния панел
         } else {
-            echo "Грешна парола!";
+            echo "Wrong password!";
         }
     } else {
-        echo "Потребителят не е намерен!";
+        echo "User not found!";
     }
 
     $stmt->close();
@@ -42,18 +42,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Logging in</title>
 </head>
 <body>
-    <h2>Вход</h2>
-    <form method="POST">
-        <p>Потребителско име: <input type="text" name="username" required></p>
-        <p>Парола: <input type="password" name="password" required></p>
-        <p><input type="submit" value="Вход"></p>
-    </form>
+    <center>
+        <h2>Logging in</h2>
+        <form method="POST">
+            <p>Username: <input type="text" name="username" required></p>
+            <p>Password: <input type="password" name="password" required></p>
+            <p><input type="submit" value="Logging in"></p>
+        </form>
+    </center>
 </body>
 </html>
