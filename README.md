@@ -12,4 +12,7 @@ b) in folder "htdocs", you need to create folder "urlShortener"
 c) paste all files in github there
 
 
-d) write in your browser 127.0.0.1/urlShortener
+d) start apache and sql modules in xampp app 
+
+
+d) copy 127.0.0.1/urlShortener to your browser 
