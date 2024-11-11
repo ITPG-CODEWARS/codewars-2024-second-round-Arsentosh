@@ -4,15 +4,15 @@ I used html, css, php, XAMPP, vsCode, sql.
 To start project you need to:
 
 
-a) install xampp
+1) install xampp
 
-b) in folder "htdocs", you need to create folder "urlShortener"
-
-
-c) paste all files in github there
+2) in folder "htdocs", you need to create folder "urlShortener"
 
 
-d) start apache and sql modules in xampp app 
+3) paste all files in github there
 
 
-d) copy 127.0.0.1/urlShortener to your browser 
+4) start apache and sql modules in xampp app 
+
+
+5) copy 127.0.0.1/urlShortener to your browser 
